@@ -1,0 +1,44 @@
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "description": "Node app",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "nodemon ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/facundo-hm/node-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/facundo-hm/node-app/issues"
+  },
+  "homepage": "https://github.com/facundo-hm/node-app#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "ejs": "^2.6.1",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.3",
+    "express-jwt": "^5.3.1",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.3.0",
+    "method-override": "^3.0.0",
+    "methods": "^1.1.2",
+    "mongoose": "^5.2.6",
+    "mongoose-unique-validator": "^2.0.1",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "request": "^2.87.0",
+    "slug": "^0.9.1"
+  },
+  "devDependencies": {
+    "newman": "^3.10.0",
+    "nodemon": "^1.18.3"
+  }
+}
