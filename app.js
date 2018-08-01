@@ -12,7 +12,8 @@ const http = require('http'),
 const isProduction = process.env.NODE_ENV === 'production';
 
 const app = express();
-const { use, listen } = app;
+const { listen } = app;
+const use = app.use.bind(app);
 
 use(cors());
 

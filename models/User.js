@@ -60,7 +60,7 @@ const methods = {
     };
   },
 
-  toProfileJSONFor = function (user) {
+  toProfileJSONFor: function (user) {
     return {
       username: this.username
     };

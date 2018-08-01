@@ -4,10 +4,9 @@ const mongoose = require('mongoose'),
       User = mongoose.model('User'),
       auth = require('../auth');
 
-const { get, put, post } = router;
 const { required } = auth;
 
-get('/user', required, (req, res, next) => {
+router.get('/user', required, (req, res, next) => {
   User.findById(req.payload.id).then((user) => {
     if (!user) {
       return res.sendStatus(401);
@@ -17,7 +16,7 @@ get('/user', required, (req, res, next) => {
   }).catch(next);
 });
 
-put('/user', required, (req, res, next) => {
+router.put('/user', required, (req, res, next) => {
   const { username, email, password } = req.body.user;
 
   User.findById(req.payload.id).then((user) => {
@@ -43,7 +42,7 @@ put('/user', required, (req, res, next) => {
   }).catch(next);
 });
 
-post('/users/login', (req, res, next) => {
+router.post('/users/login', (req, res, next) => {
   const message = 'Should be defined';
   const { email, password } = req.body.user;
   const { status } = res;
@@ -71,7 +70,7 @@ post('/users/login', (req, res, next) => {
   })(req, res, next);
 });
 
-post('/users', (req, res, next) => {
+router.post('/users', (req, res, next) => {
   const user = new User();
   const { username, email, password } = req.body.user;
 
