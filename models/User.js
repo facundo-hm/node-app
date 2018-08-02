@@ -21,6 +21,12 @@ const UserSchema = new mongoose.Schema({
     match: [/\S+@\S+\.\S+/, 'is invalid'],
     index: true
   },
+  type: {
+    type: String,
+    lowercase: true,
+    required: [true, 'Should be defined'],
+    index: true
+  },
   hash: String,
   salt: String
 }, { timestamps: true });
@@ -48,6 +54,7 @@ const methods = {
     return jwt.sign({
       id: this._id,
       username: this.username,
+      type: this.type,
       exp: parseInt(exp.getTime() / 1000),
     }, secret);
   },

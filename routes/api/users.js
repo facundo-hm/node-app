@@ -72,15 +72,23 @@ router.post('/users/login', (req, res, next) => {
 
 router.post('/users', (req, res, next) => {
   const user = new User();
+  const { referer } = req.headers;
   const { username, email, password } = req.body.user;
 
   user.username = username;
   user.email = email;
   user.setPassword(password);
+  user.type = !referer || referer.split('/').pop() === 'login' ? 'user' : 'admin';
 
   user.save().then(() => {
     return res.json({user: user.toAuthJSON()});
   }).catch(next);
+});
+
+router.get('/users/logout', required, (req, res, next) => {
+  req.session.destroy(function (err) {
+    return res.json({ logout: true });
+  });
 });
 
 module.exports = router;
