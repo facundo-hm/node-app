@@ -87,7 +87,7 @@ router.post('/users', (req, res, next) => {
 
 router.get('/users/logout', required, (req, res, next) => {
   req.session.destroy(function (err) {
-    return res.json({ logout: true });
+    return res.json('success');
   });
 });
 
