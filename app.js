@@ -9,6 +9,7 @@ const http = require('http'),
       errorhandler = require('errorhandler'),
       mongoose = require('mongoose');
 
+require('dotenv').config();
 const {
   NODE_ENV,
   MONGODB_URI,
