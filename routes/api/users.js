@@ -78,7 +78,12 @@ router.post('/users', (req, res, next) => {
   user.username = username;
   user.email = email;
   user.setPassword(password);
-  user.type = !referer || referer.split('/').pop() === 'login' ? 'user' : 'admin';
+  user.type = 'user';
+
+  if (referer) {
+    const pageReferer = referer.split('/').pop();
+    user.type = pageReferer === 'login' || pageReferer === 'signup' ? 'user' : 'admin';
+  }
 
   user.save().then(() => {
     return res.json({user: user.toAuthJSON()});
