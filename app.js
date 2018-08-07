@@ -9,7 +9,16 @@ const http = require('http'),
       errorhandler = require('errorhandler'),
       mongoose = require('mongoose');
 
-const isProduction = process.env.NODE_ENV === 'production';
+const {
+  NODE_ENV,
+  MONGODB_URI,
+  ADMIN_USERNAME,
+  EMAIL,
+  PASSWORD,
+  PORT
+} = process.env;
+
+const isProduction = NODE_ENV === 'production';
 
 const app = express();
 const use = app.use.bind(app);
@@ -35,7 +44,7 @@ use(session({
 }));
 
 if(isProduction){
-  mongoose.connect(process.env.MONGODB_URI);
+  mongoose.connect(MONGODB_URI);
 } else {
   use(errorhandler());
 
@@ -47,6 +56,9 @@ require('./models/User');
 require('./config/passport');
 
 use(require('./routes'));
+
+const { createAdmin } = require('./config/seed');
+createAdmin(ADMIN_USERNAME, EMAIL, PASSWORD);
 
 // Catch 404
 use((req, res, next) => {
@@ -79,6 +91,6 @@ use((err, req, res, next) => {
   }});
 });
 
-const server = app.listen( process.env.PORT || 3000, () => {
+const server = app.listen( PORT || 3000, () => {
   console.log('Listening on port ' + server.address().port);
 });
