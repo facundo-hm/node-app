@@ -1,11 +1,7 @@
-const http = require('http'),
-      path = require('path'),
-      methods = require('methods'),
-      express = require('express'),
+const express = require('express'),
       bodyParser = require('body-parser'),
       session = require('express-session'),
       cors = require('cors'),
-      passport = require('passport'),
       errorhandler = require('errorhandler'),
       mongoose = require('mongoose');
 
@@ -44,12 +40,17 @@ use(session({
   saveUninitialized: false 
 }));
 
+const mongooseOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}
+
 if(isProduction){
-  mongoose.connect(MONGODB_URI);
+  mongoose.connect(MONGODB_URI, mongooseOptions);
 } else {
   use(errorhandler());
 
-  mongoose.connect('mongodb://localhost/node-app');
+  mongoose.connect('mongodb://localhost/node-app', mongooseOptions);
   mongoose.set('debug', true);
 }
 
